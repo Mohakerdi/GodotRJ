@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://c1twr2i6iwxt8"]
+
+[ext_resource type="Script" uid="uid://dfmab38ss1nil" path="res://mob.gd" id="1_1qmh0"]
+[ext_resource type="Texture2D" uid="uid://djynhyd6nd3rj" path="res://art/alternative/drone/drone0.png" id="2_pcqmr"]
+[ext_resource type="Texture2D" uid="uid://bcgs744bmcdjb" path="res://art/alternative/drone/drone1.png" id="3_jbnni"]
+[ext_resource type="Texture2D" uid="uid://m60mxdulupu7" path="res://art/alternative/drone/drone6.png" id="4_eqsov"]
+[ext_resource type="Texture2D" uid="uid://ci11hglk7k2v5" path="res://art/alternative/drone/drone3.png" id="4_yscv0"]
+[ext_resource type="Texture2D" uid="uid://gud18ikyb7cg" path="res://art/alternative/missile/missile0.png" id="6_wvrms"]
+[ext_resource type="Texture2D" uid="uid://hfbuqsfomojh" path="res://art/alternative/missile/missile1.png" id="7_h0ign"]
+[ext_resource type="Texture2D" uid="uid://cprf2c5a8iko8" path="res://art/alternative/drone/drone4.png" id="7_wvrms"]
+[ext_resource type="Texture2D" uid="uid://hy4fbbvsn5n2" path="res://art/alternative/missile/missile3.png" id="8_6ak38"]
+[ext_resource type="Texture2D" uid="uid://bh0drrph0mpbi" path="res://art/alternative/drone/drone5.png" id="8_h0ign"]
+[ext_resource type="Texture2D" uid="uid://unfl6pjqenhg" path="res://art/alternative/missile/missile2.png" id="9_rxhkm"]
+[ext_resource type="Texture2D" uid="uid://dmbppxynxdnsy" path="res://art/alternative/missile/missile4.png" id="10_mhy1y"]
+[ext_resource type="Texture2D" uid="uid://6p8ln077pvm7" path="res://art/alternative/missile/missile6.png" id="11_gy8bd"]
+[ext_resource type="Texture2D" uid="uid://croahvk6jel02" path="res://art/alternative/missile/missile5.png" id="12_srff1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yscv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pcqmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jbnni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eqsov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yscv0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wvrms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eqsov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h0ign")
+}],
+"loop": true,
+"name": &"drone",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wvrms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h0ign")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6ak38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rxhkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mhy1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gy8bd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_srff1")
+}],
+"loop": true,
+"name": &"missle",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eqsov"]
+radius = 24.0
+height = 102.0
+
+[node name="Mob" type="RigidBody2D" unique_id=1995725420]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_1qmh0")
+metadata/_edit_group_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1264546813]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=140812901]
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_yscv0")
+animation = &"drone"
+frame_progress = 0.32195058
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1010341868]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_eqsov")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

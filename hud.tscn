@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://dvewtmm6d837k"]
+
+[ext_resource type="Script" uid="uid://cg8yakgevo7wv" path="res://hud.gd" id="1_64ctp"]
+[ext_resource type="FontFile" uid="uid://fdl4evh7q1vt" path="res://fonts/Xolonium-Regular.ttf" id="2_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://dxreidg6vviqe" path="res://art/alternative/control/Up.png" id="3_1xsix"]
+[ext_resource type="Texture2D" uid="uid://dbp0c1ik8eidf" path="res://art/alternative/control/Down.png" id="4_rftc2"]
+[ext_resource type="Texture2D" uid="uid://cycmldma7lpju" path="res://art/alternative/control/Left.png" id="5_61f8s"]
+[ext_resource type="Texture2D" uid="uid://da5oky5qqij7x" path="res://art/alternative/control/Right.png" id="6_g10ll"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_64ctp"]
+action = &"start_game "
+
+[sub_resource type="Shortcut" id="Shortcut_8sq4i"]
+events = [SubResource("InputEventAction_64ctp")]
+
+[node name="HUD" type="CanvasLayer" unique_id=937713297]
+script = ExtResource("1_64ctp")
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=825723845]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 78.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="." unique_id=1327827489]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -120.0
+offset_right = 240.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_font_sizes/font_size = 64
+text = "Run Judas Run!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MessageTimer" type="Timer" parent="." unique_id=1322378321]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartButton" type="Button" parent="." unique_id=1828708215]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -140.0
+offset_right = 100.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_8sq4i")
+text = "Start"
+
+[node name="ScreenControl" type="Control" parent="." unique_id=1499582916]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -80.0
+offset_right = 20.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Up" type="TouchScreenButton" parent="ScreenControl" unique_id=1430712151]
+position = Vector2(0, -60)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_1xsix")
+texture_pressed = ExtResource("3_1xsix")
+action = "move_up"
+
+[node name="Down" type="TouchScreenButton" parent="ScreenControl" unique_id=1652233738]
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_rftc2")
+texture_pressed = ExtResource("4_rftc2")
+action = "move_down"
+
+[node name="Left" type="TouchScreenButton" parent="ScreenControl" unique_id=404978189]
+position = Vector2(-68, -28)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_61f8s")
+texture_pressed = ExtResource("5_61f8s")
+action = "move_left"
+
+[node name="Right" type="TouchScreenButton" parent="ScreenControl" unique_id=836302685]
+position = Vector2(68, -28)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_g10ll")
+texture_pressed = ExtResource("6_g10ll")
+action = "move_right"
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
